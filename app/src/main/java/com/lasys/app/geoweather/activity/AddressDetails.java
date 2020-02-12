@@ -13,14 +13,14 @@ import com.lasys.app.geoweather.R;
 import com.lasys.app.geoweather.constants.SharePreference;
 
 public class AddressDetails extends AppCompatActivity implements View.OnClickListener {
-    private TextView _ad_city,_ad_state,_ad_country,_ad_postalcode,_tv_address_details ;
-    private ImageView _arrow_back ;
-    private Button _buttonWeatherDetails ;
-    private SharePreference sharePreference ;
-    private Bundle bundle ;
+    private TextView _ad_city, _ad_state, _ad_country, _ad_postalcode, _tv_address_details;
+    private ImageView _arrow_back;
+    private Button _buttonWeatherDetails;
+    private SharePreference sharePreference;
+    private Bundle bundle;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_details);
 
@@ -36,9 +36,8 @@ public class AddressDetails extends AppCompatActivity implements View.OnClickLis
         sharePreference = new SharePreference(AddressDetails.this);
 
 
-         bundle = getIntent().getExtras();
-        if (bundle != null)
-        {
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
             _tv_address_details.setText(bundle.getString("address"));
             _ad_city.setText(bundle.getString("city"));
             _ad_state.setText(bundle.getString("state"));
@@ -52,29 +51,23 @@ public class AddressDetails extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.getWeatherDetails :
-            {
-                if (bundle != null)
-                {
-                   sharePreference.setLatitude(bundle.getString("latitude"));
-                   sharePreference.setLongitude(bundle.getString("longitude"));
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.getWeatherDetails: {
+                if (bundle != null) {
+                    sharePreference.setLatitude(bundle.getString("latitude"));
+                    sharePreference.setLongitude(bundle.getString("longitude"));
 
-                    Intent intent = new Intent(AddressDetails.this,WeatherHome.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    Intent intent = new Intent(AddressDetails.this, WeatherHome.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Toast.makeText(this, "Address details are not found...", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
             }
-            case R.id.arrow_back_address_details :
-            {
+            case R.id.arrow_back_address_details: {
 
                 finish();
                 break;

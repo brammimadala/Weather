@@ -20,21 +20,17 @@ import android.widget.Toast;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 
-public class RequestPermission extends AppCompatActivity
-{
+public class RequestPermission extends AppCompatActivity {
     Context mcontext;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
-    public RequestPermission(Context context)
-    {
+    public RequestPermission(Context context) {
         mcontext = context;
     }
 
-    public void requestPermission()
-    {
+    public void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkPermission())
-            {
+            if (checkPermission()) {
                 Log.e("value", "Permission already Granted");
 
             } else {
@@ -45,17 +41,16 @@ public class RequestPermission extends AppCompatActivity
         }
     }
 
-    private boolean checkPermission()
-    {
+    private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(mcontext, ACCESS_FINE_LOCATION);
         //int result1 = ContextCompat.checkSelfPermission(mcontext, ACCESS_COARSE_LOCATION);
 
         //return (result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED);
-        return (result == PackageManager.PERMISSION_GRANTED );
+        return (result == PackageManager.PERMISSION_GRANTED);
 
     }
-    private void takePermission()
-    {
+
+    private void takePermission() {
         //ActivityCompat.requestPermissions((Activity) mcontext, new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_CODE);
         ActivityCompat.requestPermissions((Activity) mcontext, new String[]{ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
     }
@@ -63,33 +58,26 @@ public class RequestPermission extends AppCompatActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                {
+            case PERMISSION_REQUEST_CODE: {
 
-                if (grantResults.length > 0)
-                {
+                if (grantResults.length > 0) {
                     boolean FINE_LOCATION = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     //boolean COARSE_LOCATION = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
-                    if (FINE_LOCATION /*&& COARSE_LOCATION*/)
-                    {
+                    if (FINE_LOCATION /*&& COARSE_LOCATION*/) {
                         Toast.makeText(this, "Permission Granted, Now you can access location data and camera.", Toast.LENGTH_SHORT).show();
                     } else {
 
                         Toast.makeText(this, "Permission Denied, You cannot access location data and camera.", Toast.LENGTH_SHORT).show();
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION))
-                            {
+                            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
                                 showMessageOKCancel("You need to allow access to both the permissions",
-                                        new DialogInterface.OnClickListener()
-                                        {
+                                        new DialogInterface.OnClickListener() {
                                             @Override
-                                            public void onClick(DialogInterface dialog, int which)
-                                            {
-                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                                                {
-                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION},PERMISSION_REQUEST_CODE);
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
                                                 }
                                             }
                                         });
@@ -114,13 +102,10 @@ public class RequestPermission extends AppCompatActivity
                 .show();
     }
 
-    public void statusCheck()
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
+    public void statusCheck() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             final LocationManager manager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
-            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-            {
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 buildAlertMessageNoGps();
             }
         }

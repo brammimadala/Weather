@@ -80,8 +80,8 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
     private String message = "No internet connection!";
     private int duration = Snackbar.LENGTH_LONG;
 
-    private Button _saveLocation ;
-    private ImageView _arrow_back_mapview ;
+    private Button _saveLocation;
+    private ImageView _arrow_back_mapview;
 
     private LocationDetailsDB locationDetailsDB;
     private SQLiteDatabase sqLiteDatabase;
@@ -90,30 +90,25 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
     AddressModel addressModel;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (googleServiceAvailable())
-        {
+        if (googleServiceAvailable()) {
             setContentView(R.layout.activity_map_view);
             view = findViewById(R.id.toolbar_mapview);
             initMap();
-        } else
-        {
+        } else {
             Toast.makeText(this, "Google Services Not Available", Toast.LENGTH_SHORT).show();
         }
 
-        if (!InternetPermission.isOnline(MapView.this))
-        {
-            showSnackbar(view,message,duration);
+        if (!InternetPermission.isOnline(MapView.this)) {
+            showSnackbar(view, message, duration);
         }
 
-        RequestPermission permission  = new RequestPermission(this);
+        RequestPermission permission = new RequestPermission(this);
         permission.requestPermission();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             statusCheck();
         }
 
@@ -126,8 +121,7 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
     }
 
 
-    private boolean googleServiceAvailable()
-    {
+    private boolean googleServiceAvailable() {
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
         int isAvalable = api.isGooglePlayServicesAvailable(MapView.this);
 
@@ -144,16 +138,14 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
     }
 
     //Obtain the SupportMapFragment and get notified when the map is ready to be used.
-    private void initMap()
-    {
+    private void initMap() {
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
     }
 
 
     //Initializing googleapi client
-    protected synchronized void buildGoogleApi()
-    {
+    protected synchronized void buildGoogleApi() {
         mgoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -215,23 +207,21 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
         mgoogleApiClient.connect();
     }
 
-    public  String  getAddressFromLocation(final double latitude, final double longitude)
-    {
+    public String getAddressFromLocation(final double latitude, final double longitude) {
 
         Geocoder geocoder;
         addresses = null;
         geocoder = new Geocoder(this, Locale.getDefault());
 
-        String address ="",city,state,country,postalCode,knownName,addressLine ;
+        String address = "", city, state, country, postalCode, knownName, addressLine;
 
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (addresses != null && addresses.size() > 0)
-        {
-            Log.i("response ==> ",""+addresses);
+        if (addresses != null && addresses.size() > 0) {
+            Log.i("response ==> ", "" + addresses);
 
             addressLine = addresses.get(0).getAddressLine(0);
             city = addresses.get(0).getLocality();
@@ -240,90 +230,75 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
             postalCode = addresses.get(0).getPostalCode();
             knownName = addresses.get(0).getFeatureName();
 
-            addressModel= new AddressModel(
-                                        addresses.get(0).getAddressLine(0),
-                                        addresses.get(0).getFeatureName(),
-                                        addresses.get(0).getAdminArea(),
-                                        addresses.get(0).getLocality(),
-                                        addresses.get(0).getPostalCode(),
-                                        addresses.get(0).getCountryName(),
-                                        String.valueOf(addresses.get(0).getLatitude()),
-                                        String.valueOf( addresses.get(0).getLongitude())
-                                        );
+            addressModel = new AddressModel(
+                    addresses.get(0).getAddressLine(0),
+                    addresses.get(0).getFeatureName(),
+                    addresses.get(0).getAdminArea(),
+                    addresses.get(0).getLocality(),
+                    addresses.get(0).getPostalCode(),
+                    addresses.get(0).getCountryName(),
+                    String.valueOf(addresses.get(0).getLatitude()),
+                    String.valueOf(addresses.get(0).getLongitude())
+            );
 
             address = addressLine;  // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
 
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "Unable to get the Address", Toast.LENGTH_SHORT).show();
         }
 
-        return address ;
+        return address;
     }
 
 
-
-    public void showSnackbar(View view, String message, int duration)
-    {
+    public void showSnackbar(View view, String message, int duration) {
         Snackbar.make(view, message, duration).show();
     }
 
 
     @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.arrow_back_mapview :
-            {
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.arrow_back_mapview: {
                 finish();
                 break;
             }
-            case R.id.saveLocation :
-            {
-                if (InternetPermission.isOnline(MapView.this))
-                {
+            case R.id.saveLocation: {
+                if (InternetPermission.isOnline(MapView.this)) {
 
-                    if (addresses != null)
-                    {
+                    if (addresses != null) {
 
-                        locationDetailsDB =  new LocationDetailsDB(MapView.this);
+                        locationDetailsDB = new LocationDetailsDB(MapView.this);
 
                         sqLiteDatabase = locationDetailsDB.getWritableDatabase();
 
                         ContentValues cv = new ContentValues();
 
                         //latitude , longitude , addressLine ,  TOWN OR CITY , ADMIN ,  countryName ,  postalCode //
-                        cv.put(locationDetailsDB.TABLE1_COL2,addressModel.getLatitude());
-                        cv.put(locationDetailsDB.TABLE1_COL3,addressModel.getLongitude());
-                        cv.put(locationDetailsDB.TABLE1_COL4,addressModel.getAddressLine());
-                        cv.put(locationDetailsDB.TABLE1_COL5,addressModel.getLocality());
-                        cv.put(locationDetailsDB.TABLE1_COL6,addressModel.getAdmin());
-                        cv.put(locationDetailsDB.TABLE1_COL7,addressModel.getCountryName());
-                        cv.put(locationDetailsDB.TABLE1_COL8,addressModel.getPostalCode());
+                        cv.put(locationDetailsDB.TABLE1_COL2, addressModel.getLatitude());
+                        cv.put(locationDetailsDB.TABLE1_COL3, addressModel.getLongitude());
+                        cv.put(locationDetailsDB.TABLE1_COL4, addressModel.getAddressLine());
+                        cv.put(locationDetailsDB.TABLE1_COL5, addressModel.getLocality());
+                        cv.put(locationDetailsDB.TABLE1_COL6, addressModel.getAdmin());
+                        cv.put(locationDetailsDB.TABLE1_COL7, addressModel.getCountryName());
+                        cv.put(locationDetailsDB.TABLE1_COL8, addressModel.getPostalCode());
 
-                        long result = sqLiteDatabase.insert(locationDetailsDB.TABLE_NAME1,null,cv);
+                        long result = sqLiteDatabase.insert(locationDetailsDB.TABLE_NAME1, null, cv);
 
                         //Toast.makeText(this, "result == >"+result, Toast.LENGTH_SHORT).show();
 
-                        if (result != -1)
-                        {
+                        if (result != -1) {
                             Toast.makeText(this, "Address Added Successfully", Toast.LENGTH_SHORT).show();
                             finish();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(this, "Error response...", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                    else {
-                        showSnackbar(view,"Address details are not found. Please Try again",duration);
+                    } else {
+                        showSnackbar(view, "Address details are not found. Please Try again", duration);
                     }
 
-                }else
-                {
-                    showSnackbar(view,message,duration);
+                } else {
+                    showSnackbar(view, message, duration);
                 }
                 break;
             }
@@ -331,55 +306,45 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle)
-    {
+    public void onConnected(@Nullable Bundle bundle) {
         mlocationRequest = new LocationRequest();
         mlocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mlocationRequest.setInterval(3000);
         mlocationRequest.setFastestInterval(3000);
 
 
-
         //Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mgoogleApiClient, mlocationRequest, this);
         }
 
     }
 
     @Override
-    public void onConnectionSuspended(int i)
-    {
+    public void onConnectionSuspended(int i) {
 
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult)
-    {
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 
     @Override
-    public void onLocationChanged(Location location)
-    {
+    public void onLocationChanged(Location location) {
 
-        if (currentLocationUserMarker != null)
-        {
+        if (currentLocationUserMarker != null) {
             currentLocationUserMarker.remove();
         }
 
-        if (location == null)
-        {
+        if (location == null) {
             Toast.makeText(this, "Can't get Current Location", Toast.LENGTH_SHORT).show();
-        } else
-        {
-            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+        } else {
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             placeMarker(latLng);
 
-            if (mgoogleApiClient != null)
-            {
+            if (mgoogleApiClient != null) {
                 LocationServices.FusedLocationApi.removeLocationUpdates(mgoogleApiClient, this);
             }
 
@@ -387,14 +352,13 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
 
     }
 
-    private void placeMarker(LatLng latLng)
-    {
-       // LatLng ll = new LatLng(latLng.latitude, latLng.longitude);
+    private void placeMarker(LatLng latLng) {
+        // LatLng ll = new LatLng(latLng.latitude, latLng.longitude);
         mgoogleMap.clear();
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title(getAddressFromLocation(latLng.latitude,latLng.longitude));
+        markerOptions.title(getAddressFromLocation(latLng.latitude, latLng.longitude));
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         markerOptions.anchor(0.5f, 0.5f);
         markerOptions.snippet("Drag me to change Location");
@@ -403,33 +367,28 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
         currentLocationUserMarker.setDraggable(true);
         currentLocationUserMarker.showInfoWindow();
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
         mgoogleMap.animateCamera(cameraUpdate);
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
+    public void onMapReady(GoogleMap googleMap) {
         mgoogleMap = googleMap;
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
 
             buildGoogleApi();
 
             mgoogleMap.setMyLocationEnabled(true);
 
-            mgoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener()
-            {
+            mgoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
                 @Override
-                public boolean onMyLocationButtonClick()
-                {
+                public boolean onMyLocationButtonClick() {
                     //Toast.makeText(MapView.this, "onMyLocationButtonClick", Toast.LENGTH_SHORT).show();
                     Location location = mgoogleMap.getMyLocation();
-                    if (location != null)
-                    {
-                        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                    if (location != null) {
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                         placeMarker(latLng);
                     }
 
@@ -437,21 +396,17 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
                 }
             });
 
-            mgoogleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener()
-            {
+            mgoogleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
                 @Override
-                public void onMarkerDragStart(Marker marker)
-                {
+                public void onMarkerDragStart(Marker marker) {
                 }
 
                 @Override
-                public void onMarkerDrag(Marker marker)
-                {
+                public void onMarkerDrag(Marker marker) {
                 }
 
                 @Override
-                public void onMarkerDragEnd(Marker marker)
-                {
+                public void onMarkerDragEnd(Marker marker) {
                     LatLng latLng = marker.getPosition();
                     placeMarker(latLng);
                 }
@@ -505,12 +460,10 @@ public class MapView extends AppCompatActivity implements View.OnClickListener,
         }
     }*/
 
-    public void statusCheck()
-    {
+    public void statusCheck() {
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-        {
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
         }
     }

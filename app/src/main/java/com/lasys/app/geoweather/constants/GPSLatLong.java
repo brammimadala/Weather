@@ -19,8 +19,7 @@ import android.widget.Toast;
 
 import static android.content.Context.LOCATION_SERVICE;
 
-public class GPSLatLong implements LocationListener
-{
+public class GPSLatLong implements LocationListener {
 
     private final Context mContext;
 
@@ -53,11 +52,9 @@ public class GPSLatLong implements LocationListener
         getLocation();
     }
 
-    public Location getLocation()
-    {
+    public Location getLocation() {
 
-        if (checkUserLocationPermission())
-        {
+        if (checkUserLocationPermission()) {
             try {
                 locationManager = (LocationManager) mContext
                         .getSystemService(LOCATION_SERVICE);
@@ -108,15 +105,13 @@ public class GPSLatLong implements LocationListener
                         }
                     }
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             //return location;
 
-        }else
-         {
+        } else {
             Toast.makeText(mContext, "Please Enable Location Settings", Toast.LENGTH_SHORT).show();
         }
 
@@ -128,9 +123,9 @@ public class GPSLatLong implements LocationListener
     /**
      * Stop using GPS listener
      * Calling this function will stop using GPS in your app.
-     * */
-    public void stopUsingGPS(){
-        if(locationManager != null){
+     */
+    public void stopUsingGPS() {
+        if (locationManager != null) {
             locationManager.removeUpdates(GPSLatLong.this);
         }
     }
@@ -138,9 +133,9 @@ public class GPSLatLong implements LocationListener
 
     /**
      * Function to get latitude
-     * */
-    public String getLatitude(){
-        if(location != null){
+     */
+    public String getLatitude() {
+        if (location != null) {
             latitude = String.valueOf(location.getLatitude());
         }
 
@@ -151,9 +146,9 @@ public class GPSLatLong implements LocationListener
 
     /**
      * Function to get longitude
-     * */
-    public String getLongitude(){
-        if(location != null){
+     */
+    public String getLongitude() {
+        if (location != null) {
             longitude = String.valueOf(location.getLongitude());
         }
 
@@ -163,8 +158,9 @@ public class GPSLatLong implements LocationListener
 
     /**
      * Function to check GPS/Wi-Fi enabled
+     *
      * @return boolean
-     * */
+     */
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
@@ -173,8 +169,8 @@ public class GPSLatLong implements LocationListener
     /**
      * Function to show settings alert dialog.
      * On pressing the Settings button it will launch Settings Options.
-     * */
-    public void showSettingsAlert(){
+     */
+    public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         // Setting Dialog Title
@@ -203,9 +199,7 @@ public class GPSLatLong implements LocationListener
     }
 
 
-
-    private boolean checkUserLocationPermission()
-    {
+    private boolean checkUserLocationPermission() {
         if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) mContext, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Request_user_location_code);
@@ -230,26 +224,22 @@ public class GPSLatLong implements LocationListener
     }*/
 
     @Override
-    public void onLocationChanged(Location location)
-    {
+    public void onLocationChanged(Location location) {
 
     }
 
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle)
-    {
+    public void onStatusChanged(String s, int i, Bundle bundle) {
 
     }
 
     @Override
-    public void onProviderEnabled(String s)
-    {
+    public void onProviderEnabled(String s) {
 
     }
 
     @Override
-    public void onProviderDisabled(String s)
-    {
+    public void onProviderDisabled(String s) {
 
     }
 }

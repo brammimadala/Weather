@@ -7,12 +7,11 @@ import android.widget.ImageView;
 
 import com.lasys.app.geoweather.R;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener
-{
-    private ImageView _arrow_back_settings ;
+public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView _arrow_back_settings;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
@@ -21,15 +20,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View view)
-    {
-     switch (view.getId())
-     {
-         case R.id.arrow_back_settings :
-         {
-             finish();
-             break;
-         }
-     }
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.arrow_back_settings: {
+                finish();
+                break;
+            }
+        }
     }
 }

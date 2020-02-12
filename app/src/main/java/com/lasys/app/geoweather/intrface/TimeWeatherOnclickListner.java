@@ -1,6 +1,5 @@
 package com.lasys.app.geoweather.intrface;
 
-public interface TimeWeatherOnclickListner
-{
+public interface TimeWeatherOnclickListner {
     void OnItemClick(int position);
 }

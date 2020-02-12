@@ -39,7 +39,6 @@ public class AddressModel {
     private String longitude;
 
 
-
     @SerializedName("sid")
     @Expose
     private int sid;
@@ -47,19 +46,17 @@ public class AddressModel {
     /**
      * No args constructor for use in serialization
      */
-    public AddressModel()
-    {
+    public AddressModel() {
 
     }
 
 
     /**
-     *
      * @param countryName
      * @param postalCode
-     * @param addressLine  //complete address
-     * @param admin        //State
-     * @param locality     //Town
+     * @param addressLine //complete address
+     * @param admin       //State
+     * @param locality    //Town
      * @param longitude
      * @param feature     //House Address
      * @param latitude
@@ -75,6 +72,7 @@ public class AddressModel {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
     public int getSid() {
         return sid;
     }
@@ -82,6 +80,7 @@ public class AddressModel {
     public void setSid(int sid) {
         this.sid = sid;
     }
+
     public String getAddressLine() {
         return addressLine;
     }

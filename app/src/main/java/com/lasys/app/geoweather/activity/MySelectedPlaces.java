@@ -22,21 +22,19 @@ import com.lasys.app.geoweather.sqldb.LocationDetailsDB;
 import java.util.ArrayList;
 
 
-
 public class MySelectedPlaces extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView _arrow_back_selectPlaces ;
-    private ArrayList<AddressModel> addressModelArrayList ;
+    private ImageView _arrow_back_selectPlaces;
+    private ArrayList<AddressModel> addressModelArrayList;
 
     private LocationDetailsDB locationDetailsDB;
     private SQLiteDatabase sqLiteDatabase;
 
-    SharePreference sharePreference ;
+    SharePreference sharePreference;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_selected_places);
 
@@ -50,20 +48,16 @@ public class MySelectedPlaces extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
-            case R.id.arrow_back_selectPlaces:
-            {
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.arrow_back_selectPlaces: {
                 finish();
                 break;
             }
         }
     }
 
-    public void myLocationsRrecycleViewdata()
-    {
+    public void myLocationsRrecycleViewdata() {
         locationDetails();
 
         RecyclerView recyclerView = findViewById(R.id.mySelectedPlaces);
@@ -75,24 +69,22 @@ public class MySelectedPlaces extends AppCompatActivity implements View.OnClickL
 
     }
 
-    public void locationDetails()
-    {
+    public void locationDetails() {
         locationDetailsDB = new LocationDetailsDB(MySelectedPlaces.this);
-        sqLiteDatabase   = locationDetailsDB.getWritableDatabase();
+        sqLiteDatabase = locationDetailsDB.getWritableDatabase();
 
-        Cursor c = sqLiteDatabase.query(LocationDetailsDB.TABLE_NAME1,null,null,null,null,null,null);
+        Cursor c = sqLiteDatabase.query(LocationDetailsDB.TABLE_NAME1, null, null, null, null, null, null);
 
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             do {
-                int   id                          = c.getInt(0);
-                String   latitude                 = c.getString(1);
-                String   longitude                = c.getString(2);
-                String   addressLine              = c.getString(3);
-                String   city                     = c.getString(4);
-                String   state                    = c.getString(5);
-                String   country                  = c.getString(6);
-                String   postalCode               = c.getString(7);
+                int id = c.getInt(0);
+                String latitude = c.getString(1);
+                String longitude = c.getString(2);
+                String addressLine = c.getString(3);
+                String city = c.getString(4);
+                String state = c.getString(5);
+                String country = c.getString(6);
+                String postalCode = c.getString(7);
 
                 AddressModel addressModel = new AddressModel();
 
@@ -107,14 +99,12 @@ public class MySelectedPlaces extends AppCompatActivity implements View.OnClickL
 
                 addressModelArrayList.add(addressModel);
 
-            }while (c.moveToNext());
+            } while (c.moveToNext());
 
-        }
-        else
-        {
+        } else {
             Toast.makeText(MySelectedPlaces.this, "Add New Locations ", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(MySelectedPlaces.this,MapView.class);
+            Intent intent = new Intent(MySelectedPlaces.this, MapView.class);
             startActivity(intent);
             finish();
         }
