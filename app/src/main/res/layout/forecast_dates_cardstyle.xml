@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+        <LinearLayout
+            android:id="@+id/linear_Layout_forcast_date"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <com.lasys.app.geoweather.constants.CustomTextView
+                android:id="@+id/forecast_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+
+  <!--  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TableLayout
+            android:id="@+id/ferti_table_layput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.example.bramm.fpodemo.constants.CustomTextView
+                    android:id="@+id/forecast_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="2019-4-26"
+                    android:textColor="#123"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+                <ImageView
+                    android:id="@+id/forecast_date_image"
+                    android:layout_weight="1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/dap" />
+
+
+                <com.example.bramm.fpodemo.constants.CustomTextView
+                    android:id="@+id/forecast_date_max_min_temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="32/26"
+                    android:textColor="#123"
+                    android:textSize="14sp" />
+
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>-->
+
+
+
+

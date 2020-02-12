@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".activity.WeatherHome">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            //main start
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:id="@+id/iv_places"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.2"
+                        android:src="@drawable/add_location" />
+                    //Location Name
+
+                    <TextView
+                        android:id="@+id/weather_location_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:text=""
+                        android:gravity="center"
+                        android:textColor="#ffff"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_settings"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.2"
+                        android:src="@drawable/building" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    //Temprature
+
+                    <TextView
+                        android:id="@+id/weather_current_temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#ffff"
+                        android:textSize="50sp" />
+
+                    //Max Min Temp
+
+                    <TextView
+                        android:id="@+id/weather_min_max_temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#ffff"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            //main end
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/foreCastRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/darker_gray" />
+
+            //clouds start
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.35"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Clouds"
+                        android:textColor="#ffff"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/weather_cloud_iv"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/clouds" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.65"
+                    android:padding="5dp">
+
+                    <TableLayout
+                        android:id="@+id/funds_catwi_table_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="serif"
+                                android:text="Description"
+                                android:textColor="@color/light_gray"
+                                android:textSize="18sp"
+                                android:textStyle="normal" />
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:id="@+id/weather_clouds_description"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="#ffff"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="serif"
+                                android:text="Clouds"
+                                android:textColor="@color/light_gray"
+                                android:textSize="18sp"
+                                android:textStyle="normal" />
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:id="@+id/weather_clouds_number"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="#ffff"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/darker_gray" />
+
+            //clouds end
+
+            //wind start
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.35"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Wind"
+                        android:textColor="#FFFF"
+                        android:textSize="20sp" />
+
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/weather_wind_iv"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/windd" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.65"
+                    android:padding="5dp">
+
+                    <TableLayout
+                        android:id="@+id/funds_catwise_table_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="serif"
+                                android:text="Direction"
+                                android:textColor="@color/light_gray"
+                                android:textSize="18sp"
+                                android:textStyle="normal" />
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:id="@+id/weather_wind_direction"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="#ffff"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="serif"
+                                android:text="Speed"
+                                android:textColor="@color/light_gray"
+                                android:textSize="18sp"
+                                android:textStyle="normal" />
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:id="@+id/weather_wind_speed"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="#ffff"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+                        </TableRow>
+
+                    </TableLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+            //wind end
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@android:color/darker_gray" />
+
+
+            //Humadity start
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.35"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Humidity"
+                        android:textColor="#FFFF"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/weather_humidity_iv"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/humidity" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.65"
+                    android:padding="5dp">
+
+                    <TableLayout
+                        android:id="@+id/funds_catfgwise_table_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        //Hum
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="serif"
+                                android:text="Humidity"
+                                android:textColor="@color/light_gray"
+                                android:textSize="18sp"
+                                android:textStyle="normal" />
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:id="@+id/weather_humidity"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="#ffff"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+                        </TableRow>
+                        //Pressure
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="serif"
+                                android:text="pressure"
+                                android:textColor="@color/light_gray"
+                                android:textSize="18sp"
+                                android:textStyle="normal" />
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:id="@+id/weather_pressure"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="#ffff"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+                        </TableRow>
+
+                        //Sunrise
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="serif"
+                                android:text="Sunrise"
+                                android:textColor="@color/light_gray"
+                                android:textSize="18sp"
+                                android:textStyle="normal" />
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:id="@+id/weather_sunrise"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="#ffff"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+                        </TableRow>
+                        //Sunset
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="serif"
+                                android:text="Sunset"
+                                android:textColor="@color/light_gray"
+                                android:textSize="18sp"
+                                android:textStyle="normal" />
+
+                            <com.lasys.app.geoweather.constants.CustomTextView
+                                android:id="@+id/weather_sunset"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:text=""
+                                android:textColor="#ffff"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            //Humadity end
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

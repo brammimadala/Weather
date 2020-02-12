@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AddressDetails">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_address_details"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/arrow_back_address_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/arrow_back"/>
+
+        <com.lasys.app.geoweather.constants.CustomTextView
+            android:id="@+id/address_details_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location Details"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:layout_gravity="center"
+            android:textAlignment="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+  <com.lasys.app.geoweather.constants.CustomTextView
+      android:id="@+id/tv_address"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Address"
+      android:layout_marginTop="10dp"
+      android:textSize="20sp"
+      android:textColor="@color/colorPrimaryDark"
+      android:gravity="center_horizontal"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar_address_details"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"/>
+
+    <com.lasys.app.geoweather.constants.CustomTextView
+        android:id="@+id/tv_address_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/light_black"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address"
+        app:layout_constraintBottom_toTopOf="@+id/ad_table_layout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+        <TableLayout
+            android:id="@+id/ad_table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_address_details"
+            android:layout_margin="5dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="CITY/TOWN"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textSize="15sp"
+                    android:textColor="#123"/>
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:id="@+id/ad_city"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:singleLine="true"
+                    android:layout_marginRight="5dp"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="#393737"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp">
+
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="STATE"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:fontFamily="serif"
+                    android:textColor="@color/colorPrimary"/>
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textSize="15sp"
+                    android:textColor="#123"/>
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:id="@+id/ad_state"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginRight="5dp"
+                    android:textSize="15sp"
+                    android:textColor="#393737"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp">
+
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="COUNTRY"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:fontFamily="serif"
+                    android:textColor="@color/colorPrimary"/>
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textSize="15sp"
+                    android:textColor="#123"/>
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:id="@+id/ad_country"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginRight="5dp"
+                    android:textSize="15sp"
+                    android:textColor="#393737"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp">
+
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="POSTAL CODE"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:fontFamily="serif"
+                    android:textColor="@color/colorPrimary"/>
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textSize="15sp"
+                    android:textColor="#123"/>
+                <com.lasys.app.geoweather.constants.CustomTextView
+                    android:id="@+id/ad_postalcode"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginRight="5dp"
+                    android:textSize="15sp"
+                    android:textColor="#393737"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/getWeatherDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="Get Weather Details"
+            android:textColor="#ffffff"
+            app:layout_constraintTop_toBottomOf="@+id/ad_table_layout"/>
+
+
+
+</android.support.constraint.ConstraintLayout>
